@@ -39,7 +39,7 @@ module.exports = {
           },
           process.env.ACCESS_SECRET,
           {
-            expiresIn: "30m",
+            expiresIn: "1m",
           }
         );
         const verifyAccessToken = jwt.verify(

@@ -2,6 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import styled from "styled-components";
+import axios from "axios";
+
+axios.defaults.withCredentials = true;
+// axios.defaults.baseURL = "https://localhost:4000";
+axios.defaults.baseURL = "https://server.onwedding.shop";
 
 const StyledBody = styled.div`
   body {

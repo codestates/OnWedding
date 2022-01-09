@@ -13,9 +13,9 @@ const MainBody = styled.main`
 `;
 
 const MainImage = styled.section`
-  background-image: url("https://i.ibb.co/x5HNV5z/bride-g8bfa369fe-1920.jpg");
-  background-position: 55% 30%;
-  background-size: contain auto;
+  background-image: url("https://onweddingimg.s3.amazonaws.com/onWeddingMain.jpg");
+  background-position: 55% 60%;
+  background-size: 100% auto;
   background-repeat: no-repeat;
   padding: 15rem;
   opacity: 0.8;
@@ -84,10 +84,10 @@ const Main = ({ isLogin, tagArticles, setTagArticles }) => {
 
   useEffect(() => {
     axios
-      .get("https://localhost:4000/article", {
+      .get("/article", {
         withCredentials: true,
       })
-      .then(res => {
+      .then((res) => {
         setArticles(res.data.data.articles);
       });
   }, []);
@@ -96,7 +96,7 @@ const Main = ({ isLogin, tagArticles, setTagArticles }) => {
   const firstPost = lastPost - post;
   const currentPost = articles.slice(firstPost, lastPost);
 
-  const paginate = page => {
+  const paginate = (page) => {
     setCurrentPage(page);
   };
 
@@ -146,11 +146,11 @@ const Main = ({ isLogin, tagArticles, setTagArticles }) => {
         {tagArticles.length === 0 && currentPost.length === 0 ? (
           <NoArticles>게시글이 없습니다.</NoArticles>
         ) : tagArticles ? (
-          tagArticles.map(article => {
+          tagArticles.map((article) => {
             return <ArticleList article={article} key={article.id} />;
           })
         ) : currentPost ? (
-          currentPost.map(article => {
+          currentPost.map((article) => {
             return <ArticleList article={article} key={article.id} />;
           })
         ) : null}

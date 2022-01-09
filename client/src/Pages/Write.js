@@ -166,7 +166,7 @@ const Write = ({ userInfo }) => {
     }),
   });
 
-  const handleImg = event => {
+  const handleImg = (event) => {
     const imgFile = event.target.files[0];
     if (!imgFile) {
       return setImage(null);
@@ -182,50 +182,44 @@ const Write = ({ userInfo }) => {
     const promise = upload.promise();
 
     promise.then(
-      data => {
+      (data) => {
         setImage(data.Location);
       },
-      err => {
+      (err) => {
         console.log(err);
       }
     );
   };
 
-  const removeTags = e => {
+  const removeTags = (e) => {
     setHashtag(hashtag.filter((_, index) => index !== e));
   };
 
-  const addTags = e => {
-    const filtered = hashtag.filter(el => el === e.target.value);
+  const addTags = (e) => {
+    const filtered = hashtag.filter((el) => el === e.target.value);
     if (e.target.value !== "" && filtered.length === 0) {
       setHashtag([...hashtag, e.target.value]);
       e.target.value = "";
     }
   };
 
-  const writeTitle = e => {
+  const writeTitle = (e) => {
     setTitle(e.target.value);
   };
 
-  const writeMessage = e => {
+  const writeMessage = (e) => {
     setMessage(e.target.value);
   };
 
   const handleClick = () => {
     axios
-      .post(
-        `https://localhost:4000/article/${userInfo.id}`,
-        {
-          title,
-          message,
-          image,
-          hashtag,
-        },
-        {
-          withCredentials: true,
-        }
-      )
-      .then(res => {
+      .post(`/article/${userInfo.id}`, {
+        title,
+        message,
+        image,
+        hashtag,
+      })
+      .then((res) => {
         navigate("/");
       });
   };
@@ -274,17 +268,17 @@ const Write = ({ userInfo }) => {
               </ul>
               <textarea
                 type="text"
-                onKeyUp={e =>
+                onKeyUp={(e) =>
                   window.event.keyCode === 13 || window.event.keyCode === 32
                     ? addTags(e)
                     : null
                 }
-                onChange={e => setClick(e.target.value)}
+                onChange={(e) => setClick(e.target.value)}
                 placeholder="해시태그를 입력해주세요"
               />
             </TagsInput>
           </InputTags>
-          <button onClick={handleClick}>글올리기</button>
+          <button onClick={() => handleClick()}>글올리기</button>
         </WriteContents>
       </WriteOut>
     </WriteBody>

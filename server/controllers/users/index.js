@@ -7,11 +7,12 @@ module.exports = {
   password: {
     patch: async (req, res) => {
       const { accessToken, tokenExpirse } = req.cookies;
-      console.log(accessToken)
+      console.log(accessToken);
 
       if (tokenExpirse <= Date.now() / 1000) {
         res
           .clearCookie("accessToken")
+          .clearCookie("tokenExpirse")
           .status(401)
           .send({ message: "accessToken Expiration. plz Loing" });
       } else if (accessToken) {
@@ -50,6 +51,7 @@ module.exports = {
       if (tokenExpirse <= Date.now() / 1000) {
         res
           .clearCookie("accessToken")
+          .clearCookie("tokenExpirse")
           .status(401)
           .send({ message: "accessToken Expiration. plz Loing" });
       } else if (accessToken) {
@@ -72,6 +74,7 @@ module.exports = {
       if (tokenExpirse <= Date.now() / 1000) {
         res
           .clearCookie("accessToken")
+          .clearCookie("tokenExpirse")
           .status(401)
           .send({ message: "accessToken Expiration. plz Loing" });
       } else if (accessToken) {
@@ -96,14 +99,15 @@ module.exports = {
   profile: {
     patch: async (req, res) => {
       const { accessToken, tokenExpirse } = req.cookies;
-      console.log(req.cookies)
+      console.log(req.cookies);
 
-      if (tokenExpirse <= Date.now() / 1000) {
-        res
-          .clearCookie("accessToken")
-          .status(401)
-          .send({ message: "accessToken Expiration. plz Loing" });
-      } 
+      // if (tokenExpirse <= Date.now() / 1000) {
+      //   res
+      //     .clearCookie("accessToken")
+      //     .clearCookie("tokenExpirse")
+      //     .status(401)
+      //     .send({ message: "accessToken Expiration. plz Loing" });
+      // }
       if (accessToken) {
         const newImage = req.body.image;
         const userInfo = jwt.verify(accessToken, process.env.ACCESS_SECRET);
@@ -121,7 +125,10 @@ module.exports = {
           );
 
           try {
-            return res.send({ data: {img: loginInfo.image}, message: "success change image" });
+            return res.send({
+              data: { img: loginInfo.image },
+              message: "success change image",
+            });
           } catch (err) {
             console.log(err);
           }

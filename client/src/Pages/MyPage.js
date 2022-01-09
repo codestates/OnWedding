@@ -46,7 +46,7 @@ const SpanLeft = styled.div`
   > img {
     margin-top: 3rem;
     margin-bottom: 1rem;
-    border-radius: 50%;
+    border-radius: 70%;
     width: 20rem;
     height: 20rem;
     border: 1px solid #b2b2b2;
@@ -112,7 +112,7 @@ const MyPage = ({ userInfo, setImg, img, setUserInfo }) => {
 
   const [profile, setProfile] = useState(null);
 
-  const handleImg = event => {
+  const handleImg = (event) => {
     const imgFile = event.target.files[0];
     if (!imgFile) {
       return setProfile(null);
@@ -128,10 +128,10 @@ const MyPage = ({ userInfo, setImg, img, setUserInfo }) => {
     const promise = upload.promise();
 
     promise.then(
-      data => {
+      (data) => {
         setProfile(data.Location);
       },
-      err => {
+      (err) => {
         console.log(err);
       }
     );
@@ -160,9 +160,7 @@ const MyPage = ({ userInfo, setImg, img, setUserInfo }) => {
             <img src={img} alt="사진" />
           ) : (
             <img
-              src={
-                "https://onwedding-img.s3.ap-northeast-2.amazonaws.com/default-placeholder-1024x1024.png"
-              }
+              src={"https://onweddingimg.s3.amazonaws.com/default.png"}
               alt="사진"
             />
           )}

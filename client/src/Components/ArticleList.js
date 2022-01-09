@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const Article = styled.li`
+  margin-top: 2rem;
   list-style: none;
   width: 25%;
   transition: 0.4s;
@@ -40,9 +41,7 @@ const ArticleList = ({ article }) => {
           <ArticleImage src={article.image} />
         ) : (
           <ArticleImage
-            src={
-              "https://onwedding-img.s3.ap-northeast-2.amazonaws.com/default-placeholder-1024x1024.png"
-            }
+            src={"https://onweddingimg.s3.amazonaws.com/article.png"}
           />
         )}
         <ArticleTitle>{article.title}</ArticleTitle>

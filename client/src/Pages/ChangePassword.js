@@ -189,7 +189,7 @@ const ChangePassword = () => {
 
     axios
       .patch(
-        "https://localhost:4000/user/pwd",
+        "/user/pwd",
         {
           password: passwordInfo.newPassword,
         },

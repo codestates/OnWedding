@@ -52,7 +52,7 @@ const UserInfo = styled.div`
   img {
     width: 4rem;
     height: 4rem;
-    border-radius: 50%;
+    border-radius: 70%;
   }
   li {
     padding: 0.5rem 0;
@@ -85,10 +85,10 @@ const Nav = ({ isLogin, userInfoHandler, setIsLogin, setTagArticles }) => {
 
   const logoutHandler = () => {
     axios
-      .post("https://localhost:4000/auth/logout", null, {
+      .post("/auth/logout", null, {
         withCredentials: true,
       })
-      .then(res => {
+      .then((res) => {
         const resMsg = res.data.message;
         if (resMsg === "logout success!") {
           const userInfo = {
@@ -102,7 +102,7 @@ const Nav = ({ isLogin, userInfoHandler, setIsLogin, setTagArticles }) => {
           setIsLogin(false);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         throw err;
       });
   };
@@ -135,9 +135,7 @@ const Nav = ({ isLogin, userInfoHandler, setIsLogin, setTagArticles }) => {
           ) : (
             <UserInfo>
               <img
-                src={
-                  "https://onwedding-img.s3.ap-northeast-2.amazonaws.com/default.jpeg"
-                }
+                src={"https://onweddingimg.s3.amazonaws.com/default.png"}
                 alt="사진"
               />
               <ul>

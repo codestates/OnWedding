@@ -87,8 +87,8 @@ const Delete = ({ userInfoHandler, setIsLogin }) => {
     // setIsComplete(true);
 
     axios
-      .delete("https://localhost:4000/user", { withCredentials: true })
-      .then(res => {
+      .delete("/user", { withCredentials: true })
+      .then((res) => {
         console.log(res.data.message);
         const resMsg = res.data.message;
         if (resMsg === "success delete userInfo") {

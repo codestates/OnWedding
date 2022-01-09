@@ -66,7 +66,7 @@ function App() {
   }, [tagArticles]);
 
   //! 유저인포 변경 핸들러 함수
-  const userInfoHandler = userData => {
+  const userInfoHandler = (userData) => {
     setUserInfo(userData);
   };
 
@@ -123,7 +123,13 @@ function App() {
             />
           }
         />
-        <Route path="/delete" element={<Delete userInfoHandler={userInfoHandler} setIsLogin={setIsLogin}/>} />
+        <Route
+          path="/delete"
+          element={
+            <Delete userInfoHandler={userInfoHandler} setIsLogin={setIsLogin} />
+          }
+
+        />
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -64,6 +64,7 @@ const ArticleUser = styled.div`
     margin-right: 0.5rem;
     width: 3rem;
     height: 3rem;
+    border-radius: 70%;
   }
 `;
 
@@ -146,10 +147,10 @@ const Article = ({
 
   useEffect(() => {
     axios
-      .get(`https://localhost:4000/article/${Number(articleId.id)}`, {
+      .get(`/article/${Number(articleId.id)}`, {
         withCredentials: true,
       })
-      .then(res => {
+      .then((res) => {
         setArticleComments(res.data.data.comments);
         setArticle(res.data.data.article);
         setUsername(res.data.data.username);
@@ -157,11 +158,11 @@ const Article = ({
       });
   }, [articleId]);
 
-  const writeClick = e => {
+  const writeClick = (e) => {
     if (text.length > 0) {
       axios
         .post(
-          `https://localhost:4000/comment/${userInfo.id}/${article.id}`,
+          `/comment/${userInfo.id}/${article.id}`,
           {
             message: text,
           },
@@ -169,7 +170,7 @@ const Article = ({
             withCredentials: true,
           }
         )
-        .then(res => {
+        .then((res) => {
           const arr = articleComments.slice();
           setArticleComments([...arr, res.data.data.comment]);
         });
@@ -179,7 +180,7 @@ const Article = ({
     }
   };
 
-  const writeText = e => {
+  const writeText = (e) => {
     setText(e.target.value);
   };
 
@@ -192,7 +193,7 @@ const Article = ({
   const deleteArticle = () => {
     if (window.confirm("게시글을 삭제하시겠습니까?")) {
       axios
-        .delete(`https://localhost:4000/article/${Number(articleId.id)}`, {
+        .delete(`/article/${Number(articleId.id)}`, {
           withCredentials: true,
         })
         .then(() => {
@@ -203,21 +204,21 @@ const Article = ({
     }
   };
 
-  const clickDelete = e => {
-    const del = articleComments.filter(comment => comment.id !== e.id);
+  const clickDelete = (e) => {
+    const del = articleComments.filter((comment) => comment.id !== e.id);
     setArticleComments(del);
   };
 
-  const ClickHash = e => {
+  const ClickHash = (e) => {
     const tagId = hashtags.filter(
-      hashtag => hashtag.name === e.target.textContent.slice(1)
+      (hashtag) => hashtag.name === e.target.textContent.slice(1)
     );
 
     axios
-      .get(`https://localhost:4000/article/tag/${tagId[0].id}`, {
+      .get(`/article/tag/${tagId[0].id}`, {
         withCredentials: true,
       })
-      .then(res => {
+      .then((res) => {
         setTagArticles(res.data.data.articles);
       })
       .then(() => navigate("/"));
@@ -242,9 +243,7 @@ const Article = ({
               <span>
                 <span>
                   <img
-                    src={
-                      "https://onwedding-img.s3.ap-northeast-2.amazonaws.com/default.jpeg"
-                    }
+                    src={"https://onweddingimg.s3.amazonaws.com/default.png"}
                     alt="사진"
                   />
                   {username.name}
@@ -256,7 +255,7 @@ const Article = ({
           <ArticleText>{article.message}</ArticleText>
           <HashTags>
             {hashtags
-              ? hashtags.map(hashtag => {
+              ? hashtags.map((hashtag) => {
                   return (
                     <li key={hashtag.id} onClick={ClickHash}>
                       #{hashtag.name}
@@ -274,7 +273,7 @@ const Article = ({
         </ArticleContents>
         <ArticleComments>
           {articleComments &&
-            articleComments.map(comment => {
+            articleComments.map((comment) => {
               return (
                 <Comments
                   clickDelete={() => clickDelete(comment)}

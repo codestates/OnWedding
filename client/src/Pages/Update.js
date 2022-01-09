@@ -162,7 +162,7 @@ const Write = ({ edit, articleId }) => {
 
   const [image, setImage] = useState(edit.article ? edit.article.image : null);
 
-  const handleImg = event => {
+  const handleImg = (event) => {
     const imgFile = event.target.files[0];
     if (!imgFile) {
       return setImage(null);
@@ -178,18 +178,18 @@ const Write = ({ edit, articleId }) => {
     const promise = upload.promise();
 
     promise.then(
-      data => {
+      (data) => {
         setImage(data.Location);
         console.log(data.Location);
       },
-      err => {
+      (err) => {
         console.log(err);
       }
     );
   };
 
   const [hashtag, setHashtag] = useState(
-    edit.hashtags ? edit.hashtags.map(hashtag => hashtag.name) : []
+    edit.hashtags ? edit.hashtags.map((hashtag) => hashtag.name) : []
   );
   const [title, setTitle] = useState(edit.article ? edit.article.title : "");
   const [message, setMessage] = useState(
@@ -198,23 +198,23 @@ const Write = ({ edit, articleId }) => {
   const [, setClick] = useState("");
   const navigate = useNavigate();
 
-  const removeTags = e => {
+  const removeTags = (e) => {
     setHashtag(hashtag.filter((_, index) => index !== e));
   };
 
-  const addTags = e => {
-    const filtered = hashtag.filter(el => el === e.target.value);
+  const addTags = (e) => {
+    const filtered = hashtag.filter((el) => el === e.target.value);
     if (e.target.value !== "" && filtered.length === 0) {
       setHashtag([...hashtag, e.target.value]);
       e.target.value = "";
     }
   };
 
-  const writeTitle = e => {
+  const writeTitle = (e) => {
     setTitle(e.target.value);
   };
 
-  const writeMessage = e => {
+  const writeMessage = (e) => {
     setMessage(e.target.value);
   };
 
@@ -222,7 +222,7 @@ const Write = ({ edit, articleId }) => {
   const handleClick = () => {
     axios
       .patch(
-        `https://localhost:4000/article/${articleId}`,
+        `/article/${articleId}`,
         {
           title,
           message,
@@ -284,12 +284,12 @@ const Write = ({ edit, articleId }) => {
               </ul>
               <textarea
                 type="text"
-                onKeyUp={e =>
+                onKeyUp={(e) =>
                   window.event.keyCode === 13 || window.event.keyCode === 32
                     ? addTags(e)
                     : null
                 }
-                onChange={e => setClick(e.target.value)}
+                onChange={(e) => setClick(e.target.value)}
                 placeholder="해시태그를 입력해주세요"
               />
             </TagsInput>
